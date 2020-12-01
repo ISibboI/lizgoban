@@ -26,7 +26,14 @@ moves = []
 time.sleep(5)
 
 while True:
-	r = requests.get("https://online-go.com/api/v1/games/" + game_id)
+	while True:
+		try:
+			r = requests.get("https://online-go.com/api/v1/games/" + game_id)
+			break
+		except:
+			sys.stderr.write("Error downloading from OGS\n")
+			time.sleep(2)
+		
 
 	if r.status_code != 200:
 		sys.exit("Error: Received status code " + str(r.status_code))
