@@ -323,6 +323,10 @@ elif args.schedule is not None:
 		sys.exit("Could not load yaml file.")
 
 	game_list = parse_schedule(schedule)
+	print("Loaded game_list:")
+	for game in game_list:
+		print("  " + str(game))
+
 	track_game_list(game_list)
 	print("All games from list are finished, terminating.")
 
