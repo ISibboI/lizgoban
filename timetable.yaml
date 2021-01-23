@@ -1,0 +1,8 @@
+days:
+  "2021-01-23":
+    - players: ["Lukan", "Palko"]
+      time: "11:00"
+    - players: ["AndriiKravets", "Siasio"]
+      time: "14:30"
+    - players: ["artem92", "dacat1"]
+      time: "17:00"
