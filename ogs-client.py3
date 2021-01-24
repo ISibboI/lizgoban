@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import sys, requests, time, argparse, subprocess, yaml, datetime
+import sys, requests, time, argparse, subprocess, yaml, datetime, os, signal
 
 parser = argparse.ArgumentParser(description = "Automated AI review of OGS games")
 mode_argument_group = parser.add_argument_group("Mode of operation")
@@ -53,7 +53,7 @@ def track_game(game_id):
 	moves = []
 
 	# Start ai
-	ai = subprocess.Popen(args.ai_command, stdin = subprocess.PIPE, stdout = subprocess.DEVNULL, shell = True)
+	ai = subprocess.Popen("exec " + args.ai_command, stdin = subprocess.PIPE, stdout = subprocess.DEVNULL, shell = True)
 	time.sleep(args.ai_startup_time)
 	running = True
 
@@ -119,7 +119,13 @@ def track_game(game_id):
 	# If the AI is running after the game finished, let it run for the auto termination delay
 	if is_ai_running(ai):
 		print("Running AI for another {} minutes.".format(args.auto_terminate_after))
-		time.sleep(60 * args.auto_terminate_after)
+
+		end_sleep_time = datetime.datetime.now() + datetime.timedelta(minutes = args.auto_terminate_after)
+		while is_ai_running(ai) and datetime.datetime.now() < end_sleep_time:
+			sleep_time = min(10, (end_sleep_time - datetime.datetime.now()).total_seconds())
+			time.sleep(sleep_time)
+
+		print("Terminating AI")
 		ai.terminate()
 
 		# Check if the ai terminated properly
@@ -127,6 +133,11 @@ def track_game(game_id):
 			ai.wait(timeout = 10)
 		except TimeoutExpired:
 			sys.exit("AI did not terminate after ten seconds.")
+
+		if is_ai_running(ai):
+			sys.exit("AI did not terminate, even though wait was successful.")
+		else:
+			print("AI terminated successfully")
 
 	return len(moves) >= 50
 
