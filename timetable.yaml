@@ -6,3 +6,12 @@ days:
       time: "14:30"
     - players: ["artem92", "dacat1"]
       time: "17:00"
+  "2021-01-24":
+    - players: ["roln90", "Avtikh"]
+      time: "10:00"
+    - players: ["Lukan", "Palko"]
+      time: "11:00"
+    - players: ["AndriiKravets", "Siasio"]
+      time: "14:00"
+    - players: ["Lukan", "Palko"]
+      time: "19:00"
