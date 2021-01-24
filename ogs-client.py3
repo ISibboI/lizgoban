@@ -150,6 +150,8 @@ class PlayerIdDictionary:
 		if player_name in self.dictionary:
 			return self.dictionary[player_name]
 
+		print("Getting player id for {}.".format(player_name))
+
 		try:
 			r = requests.get("https://online-go.com/api/v1/ui/omniSearch?q=" + player_name)
 		except Exception:
@@ -290,7 +292,7 @@ def track_game_list(game_list):
 
 
 			# If we found a game that has not started yet, all remaining games also have not started because of sortedness
-			if game.start_datetime > datetime.datetime.now():
+			if game.start_datetime - early_start_timedelta > datetime.datetime.now():
 				break
 
 			# We found a game that might already have started and might still be running
