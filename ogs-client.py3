@@ -53,7 +53,7 @@ def track_game(game_id):
 	moves = []
 
 	# Start ai
-	ai = subprocess.Popen("exec " + args.ai_command, stdin = subprocess.PIPE, stdout = subprocess.DEVNULL, shell = True)
+	ai = subprocess.Popen(args.ai_command, stdin = subprocess.PIPE, stdout = subprocess.DEVNULL, shell = True, preexec_fn = os.setsid)
 	time.sleep(args.ai_startup_time)
 	running = True
 
@@ -126,7 +126,7 @@ def track_game(game_id):
 			time.sleep(sleep_time)
 
 		print("Terminating AI")
-		ai.terminate()
+		os.killpg(os.getpgid(ai.pid), signal.SIGTERM)
 
 		# Check if the ai terminated properly
 		try:
@@ -293,6 +293,7 @@ def track_game_list(game_list):
 
 			# If we found a game that has not started yet, all remaining games also have not started because of sortedness
 			if game.start_datetime - early_start_timedelta > datetime.datetime.now():
+				print("It is too early to look for this game.")
 				break
 
 			# We found a game that might already have started and might still be running

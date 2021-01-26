@@ -14,4 +14,22 @@ days:
     - players: ["AndriiKravets", "Siasio"]
       time: "14:00"
     - players: ["Lukan", "Palko"]
-      time: "19:00"
+      time: "17:00"
+  "2021-01-25":
+    - players: ["roln90", "Avtikh"]
+      time: "12:00"
+  "2021-01-26":
+    - time: "14:00"
+      players: ["artem92", "Siasio"]
+    - time: "19:00"
+      players: ["roln90", "Palko"]
+  "2021-01-27":
+    - time: "14:00"
+      players: ["artem92", "Siasio"]
+    - time: "19:00"
+      players: ["roln90", "Palko"]
+  "2021-01-28":
+    - time: "19:00"
+      players: ["artem92", "Siasio"]
+    - time: "10:00"
+      players: ["roln90", "Palko"]
