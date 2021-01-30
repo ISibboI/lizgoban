@@ -33,3 +33,14 @@ days:
       players: ["artem92", "Siasio"]
     - time: "10:00"
       players: ["roln90", "Palko"]
+    - time: "16:00"
+      players: ["Avtikh", "Lukan"]
+  "2021-01-30":
+    - time: "12:00"
+      players: ["roln90", "artem92"]
+    - time: "18:00"
+      players: ["roln90", "artem92"]
+  "2021-01-31":
+    - time: "12:00"
+      players: ["roln90", "artem92"]
+
