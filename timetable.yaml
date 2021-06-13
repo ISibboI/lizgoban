@@ -43,4 +43,7 @@ days:
   "2021-01-31":
     - time: "12:00"
       players: ["roln90", "artem92"]
+  "2021-05-30":
+    - time: "21:20"
+      players: ["roln90", "kbag"]
 

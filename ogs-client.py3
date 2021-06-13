@@ -126,7 +126,11 @@ def track_game(game_id):
 			time.sleep(sleep_time)
 
 		print("Terminating AI")
-		os.killpg(os.getpgid(ai.pid), signal.SIGTERM)
+		try:
+			os.killpg(os.getpgid(ai.pid), signal.SIGTERM)
+		except ProcessLookupError:
+			print("Looks like AI was terminated externally.")
+			pass
 
 		# Check if the ai terminated properly
 		try:
